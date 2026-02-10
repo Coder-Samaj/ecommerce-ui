@@ -1,8 +1,35 @@
 import { FaUser, FaLock } from "react-icons/fa";
 import VIDEO from "../assets/Mars_Rotation_Web_HB_d96299f9de.mp4";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const LoginPage = () => {
+  const[username,setUsername]=useState("");  
+  const[password,setPassword]=useState("");  
+
+  function handleUsername(e){
+    setUsername(e.target.value)
+  }
+
+  function handlePassword(e){
+    setPassword(e.target.value)
+  }
+  
+  function handleLogin(e){
+    e.preventDefault();
+    if(!username || !password){
+      alert("Please fill in all fields");
+      return
+    }
+    let obj={
+      username:username,
+      password:password
+    }
+    setUsername("");
+    setPassword("");
+    console.log(obj);
+  }
+  
   return (
     <>
       <style>
@@ -30,16 +57,16 @@ const LoginPage = () => {
       
         <div style={styles.left}>
           <div style={styles.card}>
-            <form style={styles.form}>
+            <form style={styles.form} onSubmit={handleLogin}>
               <h2 style={styles.title}>Login</h2>
 
               <div style={styles.inputWrapper}>
-                <input type="text" placeholder="Username" className="input" />
+                <input type="text" placeholder="Username" className="input" value={username} onChange={handleUsername} />
                 <FaUser style={styles.icon} />
               </div>
 
               <div style={styles.inputWrapper}>
-                <input type="password" placeholder="Password" className="input" />
+                <input type="password" placeholder="Password" className="input" value={password} onChange={handlePassword} />
                 <FaLock style={styles.icon} />
               </div>
 

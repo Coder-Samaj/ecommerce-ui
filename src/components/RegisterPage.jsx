@@ -1,8 +1,45 @@
 import { FaUser, FaEnvelope, FaLock } from "react-icons/fa";
 import VIDEO from "../assets/Mars_Rotation_Web_HB_d96299f9de.mp4";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const RegisterPage = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [email,setEmail]=useState("");
+  const [confirmPassword,setConfirmPassword]=useState("");
+
+  function handleUsername(e) {
+    setUsername(e.target.value)
+  }
+
+  function handleEmail(e){
+    setEmail(e.target.value);
+  }
+
+  function handlePassword(e) {
+    setPassword(e.target.value)
+  }
+
+  function handleconfirmPassword(e){
+    setConfirmPassword(e.target.value);
+  }
+
+  function handleRegister(e){
+    e.preventDefault();
+    let obj = {
+      username: username,
+      email:email,
+      password: password,
+      confirmPassword:confirmPassword
+    }
+    setUsername("");
+    setEmail("");
+    setPassword("");
+    setConfirmPassword("");
+    console.log(obj);
+  }
+
   return (
     <>
       <style>
@@ -27,29 +64,29 @@ const RegisterPage = () => {
       </style>
 
       <div style={styles.page}>
-        
+
         <div style={styles.left}>
           <div style={styles.card}>
             <form style={styles.form}>
               <h2 style={styles.title}>Registration</h2>
 
               <div style={styles.inputWrapper}>
-                <input type="text" placeholder="Username" required className="input" />
+                <input type="text" placeholder="Username" required className="input" value={username} onChange={handleUsername} />
                 <FaUser style={styles.icon} />
               </div>
 
               <div style={styles.inputWrapper}>
-                <input type="email" placeholder="Email" required className="input" />
+                <input type="email" placeholder="Email" required className="input" value={email} onChange={handleEmail} />
                 <FaEnvelope style={styles.icon} />
               </div>
 
               <div style={styles.inputWrapper}>
-                <input type="password" placeholder="Password" required className="input" />
+                <input type="password" placeholder="Password" required className="input" value={password} onChange={handlePassword} />
                 <FaLock style={styles.icon} />
               </div>
 
               <div style={styles.inputWrapper}>
-                <input type="password" placeholder="Confirm Password" required className="input" />
+                <input type="password" placeholder="Confirm Password" required className="input" value={confirmPassword} onChange={handleconfirmPassword} />
                 <FaLock style={styles.icon} />
               </div>
 
@@ -60,7 +97,7 @@ const RegisterPage = () => {
                 </label>
               </div>
 
-              <button type="submit" style={styles.button}>
+              <button type="submit" style={styles.button} onClick={handleRegister}>
                 Register
               </button>
 
@@ -72,7 +109,7 @@ const RegisterPage = () => {
           </div>
         </div>
 
-        
+
         <div style={styles.right}>
           <video autoPlay muted loop playsInline style={styles.video}>
             <source src={VIDEO} type="video/mp4" />
@@ -121,13 +158,13 @@ const styles = {
   },
 
   video: {
-  width: "100%",
-  height: "100%",
-  objectFit: "cover",
-  objectPosition: "right center", 
-  transform: "scale(1.05)",
-  filter: "brightness(1.15) contrast(1.1)",
-},
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
+    objectPosition: "right center",
+    transform: "scale(1.05)",
+    filter: "brightness(1.15) contrast(1.1)",
+  },
 
   glowOverlay: {
     position: "absolute",
