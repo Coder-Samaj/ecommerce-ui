@@ -4,29 +4,36 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 
 const LoginPage = () => {
-  const[username,setUsername]=useState("");  
-  const[password,setPassword]=useState("");  
 
-  function handleUsername(e){
-    setUsername(e.target.value)
-  }
+  const [user,setUser] = useState({
+    username:"",
+    password:""
+  });
 
-  function handlePassword(e){
-    setPassword(e.target.value)
+  function handleChange(e){
+    console.log(e.target.name);
+    setUser((prev)=>{
+      return {
+        ...prev,
+        [e.target.name]:e.target.value
+      }
+    })
   }
   
   function handleLogin(e){
     e.preventDefault();
-    if(!username || !password){
+    if(!user.username || !user.password){
       alert("Please fill in all fields");
       return
     }
     let obj={
-      username:username,
-      password:password
+      username:user.username,
+      password:user.password
     }
-    setUsername("");
-    setPassword("");
+    setUser({
+      username:"",
+      password:""
+    });
     console.log(obj);
   }
   
@@ -61,12 +68,12 @@ const LoginPage = () => {
               <h2 style={styles.title}>Login</h2>
 
               <div style={styles.inputWrapper}>
-                <input type="text" placeholder="Username" className="input" value={username} onChange={handleUsername} />
+                <input type="text" placeholder="Username" name="username" className="input" value={user.username} onChange={handleChange} />
                 <FaUser style={styles.icon} />
               </div>
 
               <div style={styles.inputWrapper}>
-                <input type="password" placeholder="Password" className="input" value={password} onChange={handlePassword} />
+                <input type="password" placeholder="Password" name="password" className="input" value={user.password} onChange={handleChange} />
                 <FaLock style={styles.icon} />
               </div>
 
