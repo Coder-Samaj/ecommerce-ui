@@ -4,39 +4,39 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 
 const RegisterPage = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [email,setEmail]=useState("");
-  const [confirmPassword,setConfirmPassword]=useState("");
+  const [user, setUser] = useState({
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: ""
+  });
 
-  function handleUsername(e) {
-    setUsername(e.target.value)
+  function handleChange(e) {
+    console.log(e.target.name);
+    setUser((prev)=>{
+      return {
+        ...prev,
+        [e.target.name]:e.target.value
+      }
+    })
   }
 
-  function handleEmail(e){
-    setEmail(e.target.value);
-  }
-
-  function handlePassword(e) {
-    setPassword(e.target.value)
-  }
-
-  function handleconfirmPassword(e){
-    setConfirmPassword(e.target.value);
-  }
-
-  function handleRegister(e){
+  function handleRegister(e) {
     e.preventDefault();
     let obj = {
-      username: username,
-      email:email,
-      password: password,
-      confirmPassword:confirmPassword
+      username: user.username,
+      email: user.email,
+      password: user.password,
+      confirmPassword: user.confirmPassword
     }
-    setUsername("");
-    setEmail("");
-    setPassword("");
-    setConfirmPassword("");
+
+    setUser({
+      username: "",
+      email: "",
+      password: "",
+      confirmPassword: ""
+    });
+
     console.log(obj);
   }
 
@@ -67,26 +67,26 @@ const RegisterPage = () => {
 
         <div style={styles.left}>
           <div style={styles.card}>
-            <form style={styles.form}>
+            <form style={styles.form} onSubmit={handleRegister}>
               <h2 style={styles.title}>Registration</h2>
 
               <div style={styles.inputWrapper}>
-                <input type="text" placeholder="Username" required className="input" value={username} onChange={handleUsername} />
+                <input type="text" placeholder="Username" required name="username" className="input" value={user.username} onChange={handleChange} />
                 <FaUser style={styles.icon} />
               </div>
 
               <div style={styles.inputWrapper}>
-                <input type="email" placeholder="Email" required className="input" value={email} onChange={handleEmail} />
+                <input type="email" placeholder="Email" required name="email" className="input" value={user.email} onChange={handleChange} />
                 <FaEnvelope style={styles.icon} />
               </div>
 
               <div style={styles.inputWrapper}>
-                <input type="password" placeholder="Password" required className="input" value={password} onChange={handlePassword} />
+                <input type="password" placeholder="Password" required name="password" className="input" value={user.password} onChange={handleChange} />
                 <FaLock style={styles.icon} />
               </div>
 
               <div style={styles.inputWrapper}>
-                <input type="password" placeholder="Confirm Password" required className="input" value={confirmPassword} onChange={handleconfirmPassword} />
+                <input type="password" placeholder="Confirm Password" required name="confirmPassword" className="input" value={user.confirmPassword} onChange={handleChange} />
                 <FaLock style={styles.icon} />
               </div>
 
@@ -97,7 +97,7 @@ const RegisterPage = () => {
                 </label>
               </div>
 
-              <button type="submit" style={styles.button} onClick={handleRegister}>
+              <button type="submit" style={styles.button}>
                 Register
               </button>
 
