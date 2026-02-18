@@ -1,14 +1,16 @@
-
 .navbar {
   height: 68px;
-  background-color: #5a20067a; 
+  background-color: black; 
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 90px;
   box-sizing: border-box;
-}
 
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
 
 .navbar-logo {
   font-size: 22px;
@@ -22,7 +24,6 @@
 .navbar-logo:hover {
   opacity: 0.85;
 }
-
 
 .navbar-search {
   display: flex;
