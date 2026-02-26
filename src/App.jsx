@@ -4,6 +4,7 @@ import RegisterPage from './components/RegisterPage'
 import Profile from './components/profile/Profile'
 import ProductListPage from './components/product/ProductListPage'
 import Home from './components/Home'
+import CategoryPage from './components/CategoryPage'
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Route path="/register" element={<RegisterPage/>} />
       <Route path="/profile" element={<Profile/>} />
       <Route path="/product" element={<ProductListPage/>} />
+      <Route path="/category/:categoryName" element={<CategoryPage />} />
     </Routes>
   )
 }
