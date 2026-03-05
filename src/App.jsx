@@ -5,6 +5,7 @@ import Profile from './components/profile/Profile'
 import ProductListPage from './components/product/ProductListPage'
 import Home from './components/Home'
 import CategoryPage from './components/CategoryPage'
+import CartPage from './components/cart/CartPage'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Route path="/profile" element={<Profile/>} />
       <Route path="/product" element={<ProductListPage/>} />
       <Route path="/category/:categoryName" element={<CategoryPage />} />
+      <Route path="/cart" element={<CartPage/>} />
     </Routes>
   )
 }
