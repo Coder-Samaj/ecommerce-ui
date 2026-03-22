@@ -71,7 +71,7 @@ const ProductsList = ({ searchQuery }) => {
       </div>
 
       {filteredProducts.length > 0 ? (
-        filteredProducts.map((product) => <Product key={product.map} product={product} />)
+        filteredProducts.map((product) => <Product key={product.id} product={product} />)
       ) : <p style={{ textAlign: "center" }}>No products found</p>}
 
     </div>
