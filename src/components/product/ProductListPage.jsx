@@ -1,7 +1,18 @@
 import Filter from "../Filter"
 import ProductsList from "./ProductsList"
 import Navbar from "../Navbar/Navbar"
+import { useLocation } from "react-router-dom"
 const ProductListPage = () => {
+
+  const location  = useLocation();
+  // console.log(location);
+
+  const queryParams = new URLSearchParams(location.search);
+  // console.log(queryParams);
+  
+  const searchQuery = queryParams.get("search") || "";
+  // console.log(searchQuery);
+  
   return (
     <div>
       <Navbar/>
@@ -15,7 +26,7 @@ const ProductListPage = () => {
 
         <Filter />
 
-        <ProductsList />
+        <ProductsList searchQuery={searchQuery}/>
 
       </div>
     </div>
