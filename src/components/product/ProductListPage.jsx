@@ -2,6 +2,7 @@ import Filter from "../Filter"
 import ProductsList from "./ProductsList"
 import Navbar from "../Navbar/Navbar"
 import { useLocation } from "react-router-dom"
+import { useState } from "react"
 const ProductListPage = () => {
 
   const location  = useLocation();
@@ -13,6 +14,12 @@ const ProductListPage = () => {
   const searchQuery = queryParams.get("search") || "";
   // console.log(searchQuery);
   
+  const [filter,setFilter]=useState({
+    category:[],
+    brand:[],
+    price:[0,100000]
+  })
+
   return (
     <div>
       <Navbar/>
@@ -24,9 +31,9 @@ const ProductListPage = () => {
 
       }}>
 
-        <Filter />
+        <Filter setFilter={setFilter}/>
 
-        <ProductsList searchQuery={searchQuery}/>
+        <ProductsList searchQuery={searchQuery} filter={filter}/>
 
       </div>
     </div>
