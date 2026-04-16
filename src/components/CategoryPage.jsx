@@ -1,5 +1,14 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
+  import {
+    Box,
+    Typography,
+    Paper,
+    Button,
+    Rating,
+    Divider,
+    Chip
+  } from "@mui/material";
 
 const CategoryPage = () => {
 
@@ -95,208 +104,159 @@ const CategoryPage = () => {
   const [selectedSize, setSelectedSize] = useState(null);
 
  return (
-  <div style={{
-    maxWidth: "1200px",
-    margin: "auto",
-    padding: "20px",
-    fontFamily: "Arial"
-  }}>
+  <Box sx={{ background: "#F1F5F9", minHeight: "100vh", p: 4 }}>
+      <Paper
+        sx={{
+          maxWidth: "1200px",
+          margin: "auto",
+          p: 4,
+          borderRadius: "20px",
+          boxShadow: "0 10px 40px rgba(0,0,0,0.08)"
+        }}
+      >
+        <Box sx={{ display: "flex", gap: 5 }}>
 
-    <div style={{ display: "flex", gap: "40px" }}>
+          <Box sx={{ width: "40%" }}>
+            <Paper sx={{ p: 2, borderRadius: 3 }}>
+              <img
+                src={selectedImage}
+                style={{ width: "100%", borderRadius: "10px" }}
+              />
+            </Paper>
 
-      <div style={{
-        width: "40%",
-        position: "sticky",
-        top: "20px"
-      }}>
+            <Box sx={{ display: "flex", gap: 1, mt: 2 }}>
+              {product.images.map((img, i) => (
+                <img
+                  key={i}
+                  src={img}
+                  width="70"
+                  onClick={() => setSelectedImage(img)}
+                  style={{
+                    cursor: "pointer",
+                    border:
+                      selectedImage === img
+                        ? "2px solid #6366F1"
+                        : "1px solid #ddd",
+                    borderRadius: "8px"
+                  }}
+                />
+              ))}
+            </Box>
+          </Box>
 
-        <div style={{
-          border: "1px solid #eee",
-          padding: "10px",
-          borderRadius: "10px",
-          background: "#fff"
-        }}>
-          <img
-            src={selectedImage}
-            alt="product"
-            style={{ width: "100%", borderRadius: "10px" }}
-          />
-        </div>
+          <Box sx={{ width: "60%" }}>
+            <Typography variant="h5" fontWeight={700}>
+              {product.name}
+            </Typography>
 
-        <div style={{
-          display: "flex",
-          gap: "10px",
-          marginTop: "10px"
-        }}>
-          {product.images.map((img, i) => (
-            <img
-              key={i}
-              src={img}
-              width="70"
-              onClick={() => setSelectedImage(img)}
-              style={{
-                cursor: "pointer",
-                border: selectedImage === img ? "2px solid #2874f0" : "1px solid #ddd",
-                borderRadius: "6px"
-              }}
-            />
-          ))}
-        </div>
+            <Box sx={{ display: "flex", alignItems: "center", mt: 1 }}>
+              <Rating value={4.2} precision={0.1} readOnly />
+              <Typography ml={1} fontSize={14}>
+                (1,245 reviews)
+              </Typography>
+            </Box>
 
-      </div>
+            <Box sx={{ mt: 2 }}>
+              <Typography fontSize={28} fontWeight={700} color="#16A34A">
+                ₹{product.price}
+              </Typography>
 
-      <div style={{ width: "60%" }}>
+              <Typography
+                sx={{ textDecoration: "line-through", color: "#777" }}
+              >
+                ₹{product.originalPrice}
+              </Typography>
 
-        <h2 style={{ marginBottom: "5px" }}>{product.name}</h2>
+              <Typography color="error" fontWeight={600}>
+                {product.discount}% OFF
+              </Typography>
+            </Box>
 
-        <div style={{ color: "#555", marginBottom: "10px" }}>
-          ⭐ 4.2 | 1,245 ratings
-        </div>
+            <Typography sx={{ mt: 2, color: "#555" }}>
+              {product.description}
+            </Typography>
 
-        <h1 style={{ color: "green", margin: "10px 0" }}>
-          ₹{product.price}
-        </h1>
+            <Box sx={{ mt: 3 }}>
+              <Typography fontWeight={600}>Select Size</Typography>
 
-        <p style={{ marginBottom: "10px" }}>
-          <span style={{
-            textDecoration: "line-through",
-            color: "#888",
-            marginRight: "10px"
-          }}>
-            ₹{product.originalPrice}
-          </span>
+              <Box sx={{ display: "flex", gap: 1, mt: 1 }}>
+                {product.sizes.map((size) => (
+                  <Button
+                    key={size}
+                    onClick={() => setSelectedSize(size)}
+                    variant={selectedSize === size ? "contained" : "outlined"}
+                    sx={{
+                      borderRadius: "20px",
+                      minWidth: "50px"
+                    }}
+                  >
+                    {size}
+                  </Button>
+                ))}
+              </Box>
+            </Box>
 
-          <span style={{ color: "green", fontWeight: "bold" }}>
-            {product.discount}% off
-          </span>
-        </p>
+            <Box sx={{ mt: 3, display: "flex", gap: 1 }}>
+              <Chip label="🚚 2-4 Days Delivery" />
+              <Chip label="💰 COD Available" />
+              <Chip label="🔁 7 Days Return" />
+            </Box>
 
-        <p style={{ color: "#444", marginBottom: "15px" }}>
-          {product.description}
-        </p>
-
-        
-        <div style={{ marginBottom: "20px" }}>
-          <h4>Select Size</h4>
-
-          <div style={{ display: "flex", gap: "10px" }}>
-            {product.sizes.map(size => (
-              <button
-                key={size}
-                onClick={() => setSelectedSize(size)}
-                style={{
-                  padding: "10px 15px",
-                  border: selectedSize === size ? "2px solid #2874f0" : "1px solid #ccc",
-                  background: selectedSize === size ? "#e6f0ff" : "white",
-                  cursor: "pointer",
-                  borderRadius: "5px"
+            <Box sx={{ mt: 4, display: "flex", gap: 2 }}>
+              <Button
+                sx={{
+                  px: 4,
+                  py: 1.5,
+                  borderRadius: "30px",
+                  background:
+                    "linear-gradient(135deg,#6366F1,#06B6D4)",
+                  color: "#fff"
                 }}
               >
-                {size}
-              </button>
-            ))}
-          </div>
-        </div>
+                Add to Cart
+              </Button>
 
-        
-        <div style={{
-          background: "#f5f5f5",
-          padding: "15px",
-          borderRadius: "8px",
-          marginBottom: "20px"
-        }}>
-          <p>🚚 Delivery in 2-4 days</p>
-          <p>💰 Cash on Delivery Available</p>
-          <p>🔁 7 Days Replacement</p>
-        </div>
+              <Button
+                variant="outlined"
+                sx={{
+                  px: 4,
+                  py: 1.5,
+                  borderRadius: "30px"
+                }}
+              >
+                Buy Now
+              </Button>
+            </Box>
 
-        
-        <div style={{ marginBottom: "30px" }}>
-          <button style={{
-            background: "#ff9f00",
-            padding: "12px 30px",
-            border: "none",
-            marginRight: "10px",
-            color: "white",
-            fontWeight: "bold",
-            borderRadius: "5px",
-            cursor: "pointer"
-          }}>
-            Add to Cart
-          </button>
+            <Divider sx={{ my: 3 }} />
 
-          <button style={{
-            background: "#fb641b",
-            padding: "12px 30px",
-            border: "none",
-            color: "white",
-            fontWeight: "bold",
-            borderRadius: "5px",
-            cursor: "pointer"
-          }}>
-            Buy Now
-          </button>
-        </div>
+            <Typography variant="h6">Product Details</Typography>
+            <ul>
+              <li>Premium Quality</li>
+              <li>Durable Material</li>
+              <li>Modern Design</li>
+            </ul>
 
-        
-        <div style={{
-          borderTop: "1px solid #eee",
-          paddingTop: "20px",
-          marginBottom: "20px"
-        }}>
-          <h3>Product Details</h3>
-          <ul style={{ color: "#444" }}>
-            <li>Color: Black</li>
-            <li>Material: Cotton</li>
-            <li>Fit: Regular</li>
-            <li>Usage: Casual Wear</li>
-          </ul>
-        </div>
+            <Divider sx={{ my: 3 }} />
 
-        
-        <div style={{
-          borderTop: "1px solid #eee",
-          paddingTop: "20px",
-          marginBottom: "20px"
-        }}>
-          <h3>Description</h3>
-          <p style={{ color: "#444" }}>
-            This product is made with high-quality material ensuring comfort and durability.
-            Perfect for daily use and stylish appearance.
-          </p>
-        </div>
+            <Typography variant="h6">Related Products</Typography>
 
-        
-        <div style={{
-          borderTop: "1px solid #eee",
-          paddingTop: "20px"
-        }}>
-          <h3>Related Products</h3>
+            <Box sx={{ display: "flex", gap: 2, mt: 2 }}>
+              <Paper sx={{ p: 1, textAlign: "center" }}>
+                <img src={product.images[0]} width="100" />
+                <Typography>Item A</Typography>
+              </Paper>
 
-          <div style={{ display: "flex", gap: "20px" }}>
-            <div style={{ cursor: "pointer" }}>
-              <img
-                src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab"
-                width="120"
-                style={{ borderRadius: "8px" }}
-              />
-              <p>Product A</p>
-            </div>
+              <Paper sx={{ p: 1, textAlign: "center" }}>
+                <img src={product.images[1]} width="100" />
+                <Typography>Item B</Typography>
+              </Paper>
+            </Box>
 
-            <div style={{ cursor: "pointer" }}>
-              <img
-                src="https://images.unsplash.com/photo-1542291026-7eec264c27ff"
-                width="120"
-                style={{ borderRadius: "8px" }}
-              />
-              <p>Product B</p>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
+          </Box>
+        </Box>
+      </Paper>
+    </Box>
 );
 };
 

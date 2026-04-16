@@ -1,5 +1,11 @@
-import { FaUser, FaEnvelope, FaLock } from "react-icons/fa";
-import VIDEO from "../assets/Mars_Rotation_Web_HB_d96299f9de.mp4";
+import {
+  Box,
+  TextField,
+  Typography,
+  Button,
+  Paper,
+  Divider
+} from "@mui/material";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
@@ -41,191 +47,151 @@ const RegisterPage = () => {
   }
 
   return (
-    <>
-      <style>
-        {`
-          .input {
-            width: 100%;
-            height: 45px;
-            border-radius: 40px;
-            border: 1px solid rgba(255,255,255,0.3);
-            background: transparent;
-            color: white;
-            padding: 0 45px 0 20px;
-            outline: none;
-            font-size: 14px;
-          }
+   <Box
+      sx={{
+        height: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
 
-          .input::placeholder {
-            color: white;
-            opacity: 1;
-          }
-        `}
-      </style>
+        background:
+          "radial-gradient(circle at top right, #6366F1, transparent 40%), radial-gradient(circle at bottom left, #06B6D4, transparent 40%), #0F172A",
+      }}
+    >
+      <Paper
+        sx={{
+          width: 420,
+          p: 4,
+          borderRadius: "20px",
 
-      <div style={styles.page}>
+          background: "rgba(255,255,255,0.05)",
+          backdropFilter: "blur(20px)",
+          border: "1px solid rgba(255,255,255,0.1)",
 
-        <div style={styles.left}>
-          <div style={styles.card}>
-            <form style={styles.form} onSubmit={handleRegister}>
-              <h2 style={styles.title}>Registration</h2>
+          boxShadow: "0 25px 70px rgba(0,0,0,0.6)",
+        }}
+      >
+        <Typography
+          variant="h5"
+          fontWeight={700}
+          sx={{
+            textAlign: "center",
+            mb: 1,
+            color: "#fff",
+          }}
+        >
+          Create Account 🚀
+        </Typography>
 
-              <div style={styles.inputWrapper}>
-                <input type="text" placeholder="Username" required name="username" className="input" value={user.username} onChange={handleChange} />
-                <FaUser style={styles.icon} />
-              </div>
+        <Typography
+          sx={{
+            textAlign: "center",
+            color: "#94A3B8",
+            fontSize: 14,
+            mb: 3,
+          }}
+        >
+          Join and start shopping today
+        </Typography>
 
-              <div style={styles.inputWrapper}>
-                <input type="email" placeholder="Email" required name="email" className="input" value={user.email} onChange={handleChange} />
-                <FaEnvelope style={styles.icon} />
-              </div>
+        <Divider sx={{ mb: 3, borderColor: "rgba(255,255,255,0.1)" }} />
 
-              <div style={styles.inputWrapper}>
-                <input type="password" placeholder="Password" required name="password" className="input" value={user.password} onChange={handleChange} />
-                <FaLock style={styles.icon} />
-              </div>
+        <form onSubmit={handleRegister}>
+          <TextField
+            fullWidth
+            label="Username"
+            name="username"
+            value={user.username}
+            onChange={handleChange}
+            sx={inputStyle}
+          />
 
-              <div style={styles.inputWrapper}>
-                <input type="password" placeholder="Confirm Password" required name="confirmPassword" className="input" value={user.confirmPassword} onChange={handleChange} />
-                <FaLock style={styles.icon} />
-              </div>
+          <TextField
+            fullWidth
+            label="Email"
+            name="email"
+            value={user.email}
+            onChange={handleChange}
+            sx={inputStyle}
+          />
 
-              <div style={styles.row}>
-                <label style={styles.checkboxLabel}>
-                  <input type="checkbox" required />
-                  I agree to the terms & conditions
-                </label>
-              </div>
+          <TextField
+            fullWidth
+            type="password"
+            label="Password"
+            name="password"
+            value={user.password}
+            onChange={handleChange}
+            sx={inputStyle}
+          />
 
-              <button type="submit" style={styles.button}>
-                Register
-              </button>
+          <TextField
+            fullWidth
+            type="password"
+            label="Confirm Password"
+            name="confirmPassword"
+            value={user.confirmPassword}
+            onChange={handleChange}
+            sx={inputStyle}
+          />
 
-              <p style={styles.registerText}>
-                Already have an account?{" "}
-                <Link to="/login" style={styles.linkBold}>Login</Link>
-              </p>
-            </form>
-          </div>
-        </div>
+          <Button
+            fullWidth
+            type="submit"
+            sx={{
+              mt: 2,
+              py: 1.5,
+              borderRadius: "30px",
+              fontWeight: 600,
+              background:
+                "linear-gradient(135deg,#6366F1,#06B6D4)",
+              color: "#fff",
+              fontSize: 16,
+              letterSpacing: "0.5px",
+              "&:hover": {
+                boxShadow: "0 10px 30px rgba(99,102,241,0.5)",
+              },
+            }}
+          >
+            Register
+          </Button>
 
-
-        <div style={styles.right}>
-          <video autoPlay muted loop playsInline style={styles.video}>
-            <source src={VIDEO} type="video/mp4" />
-          </video>
-
-          <div style={styles.glowOverlay} />
-        </div>
-      </div>
-    </>
+          <Typography
+            sx={{
+              textAlign: "center",
+              mt: 2,
+              color: "#CBD5F5",
+              fontSize: 14,
+            }}
+          >
+            Already have an account?{" "}
+            <Link
+              to="/login"
+              style={{ color: "#fff", fontWeight: 600 }}
+            >
+              Login
+            </Link>
+          </Typography>
+        </form>
+      </Paper>
+    </Box>
   );
 };
 
-const styles = {
-  page: {
-    height: "100vh",
-    display: "flex",
-    fontFamily: "Poppins, sans-serif",
-    backgroundColor: "black",
+const inputStyle = {
+  mb: 2,
+  "& .MuiOutlinedInput-root": {
+    borderRadius: "12px",
+    color: "#fff",
+    "& fieldset": {
+      borderColor: "rgba(255,255,255,0.2)",
+    },
+    "&:hover fieldset": {
+      borderColor: "#6366F1",
+    },
   },
-
-  left: {
-    width: "50%",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-
-  card: {
-    width: 420,
-    height: 520,
-    background:
-      "linear-gradient(135deg, rgba(255,255,255,0.18), rgba(255,255,255,0.05))",
-    borderRadius: 16,
-    color: "white",
-    padding: "0 40px",
-    backdropFilter: "blur(12px)",
-    WebkitBackdropFilter: "blur(12px)",
-    border: "1px solid rgba(255,255,255,0.25)",
-    boxShadow: "0 20px 40px rgba(0,0,0,0.45)",
-  },
-
-  right: {
-    width: "50%",
-    position: "relative",
-    overflow: "hidden",
-  },
-
-  video: {
-    width: "100%",
-    height: "100%",
-    objectFit: "cover",
-    objectPosition: "right center",
-    transform: "scale(1.05)",
-    filter: "brightness(1.15) contrast(1.1)",
-  },
-
-  glowOverlay: {
-    position: "absolute",
-    inset: 0,
-    background:
-      "radial-gradient(circle at center, rgba(255,120,60,0.25), transparent 60%)",
-    pointerEvents: "none",
-  },
-
-  form: { width: "100%" },
-
-  title: {
-    textAlign: "center",
-    marginBottom: 24,
-  },
-
-  inputWrapper: {
-    position: "relative",
-    marginBottom: 18,
-  },
-
-  icon: {
-    position: "absolute",
-    right: 18,
-    top: "50%",
-    transform: "translateY(-50%)",
-    color: "white",
-  },
-
-  row: {
-    marginBottom: 20,
-    fontSize: 14,
-  },
-
-  checkboxLabel: {
-    display: "flex",
-    alignItems: "center",
-    gap: 6,
-  },
-
-  button: {
-    width: "100%",
-    height: 45,
-    borderRadius: 40,
-    border: "none",
-    backgroundColor: "white",
-    color: "black",
-    fontWeight: 700,
-    cursor: "pointer",
-  },
-
-  registerText: {
-    textAlign: "center",
-    marginTop: 16,
-    fontSize: 15,
-  },
-
-  linkBold: {
-    color: "white",
-    fontWeight: 600,
-    textDecoration: "none",
+  "& .MuiInputLabel-root": {
+    color: "#94A3B8",
   },
 };
 

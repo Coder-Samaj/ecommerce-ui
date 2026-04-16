@@ -1,47 +1,109 @@
 import React from 'react'
+import { Box, Typography, Card } from "@mui/material";
 
-const Product = ({product}) => {
+const Product = ({ product }) => {
   // console.log(product);
   return (
-    <div style={{
+    <Card
+      sx={{
+        display: "flex",
+        gap: 3,
+        p: 2,
+        mb: 2,
+        borderRadius: 2,
+        boxShadow: "0 2px 10px rgba(0,0,0,0.08)",
+        transition: "0.3s",
+        cursor: "pointer",
+
+        "&:hover": {
+          boxShadow: "0 6px 20px rgba(0,0,0,0.15)",
+          transform: "translateY(-3px)",
+        },
+      }}
+    >
+      <Box
+        sx={{
+          width: 220,
+          height: 220,
           display: "flex",
-          gap: "20px",
-          padding: "20px",
-          borderBottom:"2px solid black"
-        }}>
+          alignItems: "center",
+          justifyContent: "center",
+          bgcolor: "#F8FAFC",
+          borderRadius: 2,
+        }}
+      >
+        <Box
+          component="img"
+          src={product.image}
+          alt={product.name}
+          sx={{
+            width: "90%",
+            height: "90%",
+            objectFit: "contain",
+          }}
+        />
+      </Box>
 
-          <div style={{ width: "250px", height: "250px" }}>
-            <img
-              src={product.image}
-              alt={product.name}
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "contain",
-              }}
-            />
-          </div>
+      <Box sx={{ flex: 1 }}>
+        <Typography
+          variant="h6"
+          sx={{
+            fontWeight: 600,
+            color: "#111827",
+            mb: 1,
+          }}
+        >
+          {product.name}
+        </Typography>
 
-          <div style={{ flex: 1 }}>
-            <h2>{product.name}</h2>
-            <ul>
-              {product.specs.map((spec,index)=>(
-                <li key={index}>{spec}</li>
-              ))}
-            </ul>
-          </div>
+        <Box component="ul" sx={{ pl: 2, color: "#4B5563" }}>
+          {product.specs.map((spec, index) => (
+            <li key={index}>
+              <Typography variant="body2">{spec}</Typography>
+            </li>
+          ))}
+        </Box>
+      </Box>
 
-          <div style={{ width: "200px", textAlign: "left" }}>
-            <h2>{product.price}</h2>
-            <p style={{ color: "green" }}>
-              {product.exchangeOffer}
-            </p>
-            <p style={{ color: "green", fontWeight: "bold" }}>
-              {product.bankOffer}
-            </p>
-          </div>
+      <Box
+        sx={{
+          width: 200,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+        }}
+      >
+        <Typography
+          variant="h6"
+          sx={{
+            fontWeight: 700,
+            color: "#111827",
+          }}
+        >
+          {product.price}
+        </Typography>
 
-        </div>
+        <Typography
+          sx={{
+            color: "#16A34A",
+            fontSize: 14,
+            mt: 1,
+          }}
+        >
+          {product.exchangeOffer}
+        </Typography>
+
+        <Typography
+          sx={{
+            color: "#16A34A",
+            fontWeight: 600,
+            fontSize: 14,
+          }}
+        >
+          {product.bankOffer}
+        </Typography>
+      </Box>
+    </Card>
   )
 }
 

@@ -2,6 +2,8 @@ import Filter from "../Filter"
 import ProductsList from "./ProductsList"
 import Navbar from "../Navbar/Navbar"
 import { useLocation } from "react-router-dom"
+import { Box } from "@mui/material";
+
 const ProductListPage = () => {
 
   const location  = useLocation();
@@ -14,22 +16,46 @@ const ProductListPage = () => {
   // console.log(searchQuery);
   
   return (
-    <div>
-      <Navbar/>
-      <div style={{
-        width: "100%",
-        height: "calc(100vh - 68px)",
-        display: "flex",
-        gap: "3px",
+     <Box sx={{ bgcolor: "#F1F5F9", minHeight: "100vh" }}>
+      <Navbar />
 
-      }}>
+      <Box
+        sx={{
+          display: "flex",
+          gap: 2,
+          px: 2,
+          py: 2,
+        }}
+      >
+        <Box
+          sx={{
+            width: 260,
+            minWidth: 260,
+            bgcolor: "#ffffff",
+            borderRadius: 2,
+            boxShadow: "0 2px 10px rgba(0,0,0,0.08)",
+            p: 2,
+            height: "fit-content",
+          }}
+        >
+          <Filter/>
+        </Box>
 
-        <Filter />
-
-        <ProductsList searchQuery={searchQuery}/>
-
-      </div>
-    </div>
+        <Box
+          sx={{
+            flex: 1,
+            bgcolor: "#ffffff",
+            borderRadius: 2,
+            boxShadow: "0 2px 10px rgba(0,0,0,0.08)",
+            p: 2,
+          }}
+        >
+          <ProductsList
+            searchQuery={searchQuery}
+          />
+        </Box>
+      </Box>
+    </Box>
   )
 }
 
