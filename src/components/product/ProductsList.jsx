@@ -1,5 +1,6 @@
 import React from 'react'
 import Product from './Product'
+import { Box, Typography } from "@mui/material";
 
 const productsData = [
   {
@@ -59,22 +60,61 @@ const ProductsList = ({ searchQuery }) => {
 
 
   return (
-    <div style={{
-      width: "80%",
-      height: "100%",
-      border: "2px solid black",
-      overflowY: "auto",
-    }}>
+    <Box
+      sx={{
+        width: "100%",
+        height: "100%",
+      }}
+    >
+      <Box
+        sx={{
+          mb: 2,
+          pb: 1,
+          borderBottom: "1px solid #E5E7EB",
+        }}
+      >
+        <Typography
+          variant="h6"
+          sx={{
+            fontWeight: 600,
+            color: "#111827",
+          }}
+        >
+          Products
+        </Typography>
 
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <h1>Product</h1>
-      </div>
+        <Typography
+          sx={{
+            fontSize: 14,
+            color: "#6B7280",
+          }}
+        >
+          {filteredProducts.length} items found
+        </Typography>
+      </Box>
 
       {filteredProducts.length > 0 ? (
-        filteredProducts.map((product) => <Product key={product.id} product={product} />)
-      ) : <p style={{ textAlign: "center" }}>No products found</p>}
+        filteredProducts.map((product) => (
+          <Product key={product.id} product={product} />
+        ))
+      ) : (
+        <Box
+          sx={{
+            textAlign: "center",
+            mt: 8,
+            color: "#6B7280",
+          }}
+        >
+          <Typography variant="h6">
+            No products found 😔
+          </Typography>
 
-    </div>
+          <Typography sx={{ fontSize: 14 }}>
+            Try adjusting your search or filters
+          </Typography>
+        </Box>
+      )}
+    </Box>
   )
 }
 

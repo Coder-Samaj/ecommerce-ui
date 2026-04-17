@@ -7,7 +7,7 @@ import {
   FormControlLabel,
   Checkbox,
   Slider,
-  Button
+  Button,
 } from "@mui/material";
 
 const Filter = () => {
@@ -61,76 +61,144 @@ const Filter = () => {
   return (
     <Box
       sx={{
-        width: "20%",
-        height: "100%",
-        p: 3,
-        borderRight: "1px solid #ddd",
-        position: "sticky",
-        top: 0,
-        overflowY: "auto",
-        backgroundColor: "#fff",
-      }}>
-      <Typography variant="h6" align='center' fontWeight="bold" gutterBottom>
+        width: "100%",
+        p: 2,
+      }}
+    >
+      <Typography
+        variant="h6"
+        sx={{
+          fontWeight: 700,
+          color: "#111827",
+          mb: 1,
+        }}
+      >
         Filters
       </Typography>
 
-      <Divider sx={{ mb: 2 }}></Divider>
+      <Divider sx={{ mb: 2 }} />
 
-      <Typography variant="subtitle1" fontWeight="600" sx={{ mb: 1 }}>
-        Category
-      </Typography>
+      <Typography sx={sectionTitle}>Category</Typography>
 
       <FormGroup>
-        <FormControlLabel control={<Checkbox value="Mobiles" checked={category.includes("Mobiles")} onChange={handleCategory} />} label="Mobiles" />
-        <FormControlLabel control={<Checkbox value="Laptops" checked={category.includes("Laptops")} onChange={handleCategory} />} label="Laptops" />
-        <FormControlLabel control={<Checkbox value="Tablets" checked={category.includes("Tablets")} onChange={handleCategory} />} label="Tablets" />
-        <FormControlLabel control={<Checkbox value="Shoees" checked={category.includes("Shoees")} onChange={handleCategory} />} label="Shoees" />
-      </FormGroup>
-
-      <Divider sx={{ mb: 2 }}></Divider>
-
-      <Typography variant="subtitle1" fontWeight="600" sx={{ mb: 1 }}>
-        Brand
-      </Typography>
-
-      <FormGroup>
-        <FormControlLabel control={<Checkbox value="Apple" checked={brand.includes("Apple")} onChange={handleBrand} />} label="Apple" />
-        <FormControlLabel control={<Checkbox value="Samsung" checked={brand.includes("Samsung")} onChange={handleBrand} />} label="Samsung" />
-        <FormControlLabel control={<Checkbox value="OnePlus" checked={brand.includes("OnePlus")} onChange={handleBrand} />} label="OnePlus" />
-        <FormControlLabel control={<Checkbox value="Google Pixel" checked={brand.includes("Google Pixel")} onChange={handleBrand} />} label="Google Pixel" />
+        {["Mobiles", "Laptops", "Tablets", "Shoes"].map((item) => (
+          <FormControlLabel
+            key={item}
+            control={
+              <Checkbox
+                value={item}
+                checked={category.includes(item)}
+                onChange={handleCategory}
+                sx={checkboxStyle}
+              />
+            }
+            label={item}
+          />
+        ))}
       </FormGroup>
 
       <Divider sx={{ my: 2 }} />
 
-      <Typography variant="subtitle1" fontWeight="600" sx={{ mb: 1 }}>
-        Price Range
-      </Typography>
+      <Typography sx={sectionTitle}>Brand</Typography>
+
+      <FormGroup>
+        {["Apple", "Samsung", "OnePlus", "Google Pixel"].map((item) => (
+          <FormControlLabel
+            key={item}
+            control={
+              <Checkbox
+                value={item}
+                checked={brand.includes(item)}
+                onChange={handleBrand}
+                sx={checkboxStyle}
+              />
+            }
+            label={item}
+          />
+        ))}
+      </FormGroup>
+
+      <Divider sx={{ my: 2 }} />
+
+      <Typography sx={sectionTitle}>Price Range</Typography>
 
       <Slider
-        defaultValue={[0, 100000]}
         value={price}
         onChange={handlePrice}
         min={0}
         max={100000}
         valueLabelDisplay="auto"
+        sx={{
+          color: "#6366F1",
+        }}
       />
 
-      <Box sx={{ display: "flex", justifyContent: "space-between", mt: 1 }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          mt: 1,
+          color: "#6B7280",
+        }}
+      >
         <Typography variant="body2">₹{price[0]}</Typography>
         <Typography variant="body2">₹{price[1]}</Typography>
       </Box>
 
       <Divider sx={{ my: 2 }} />
 
-      <Button variant="contained" fullWidth sx={{ mb: 1 }} onClick={handleApply}>
+      <Button
+        fullWidth
+        onClick={handleApply}
+        sx={{
+          mb: 1,
+          borderRadius: "25px",
+          background:
+            "linear-gradient(135deg, #6366F1, #06B6D4)",
+          color: "#fff",
+          fontWeight: 600,
+
+          "&:hover": {
+            boxShadow: "0 5px 15px rgba(99,102,241,0.4)",
+          },
+        }}
+      >
         Apply Filters
       </Button>
 
-      <Button variant="outlined" fullWidth onClick={handleClear}>
+      <Button
+        fullWidth
+        variant="outlined"
+        onClick={handleClear}
+        sx={{
+          borderRadius: "25px",
+          borderColor: "#6366F1",
+          color: "#6366F1",
+          fontWeight: 600,
+
+          "&:hover": {
+            borderColor: "#4F46E5",
+            backgroundColor: "rgba(99,102,241,0.05)",
+          },
+        }}
+      >
         Clear Filters
       </Button>
     </Box>
-  )
-}
+  );
+};
+
+const sectionTitle = {
+  fontWeight: 600,
+  mb: 1,
+  color: "#374151",
+};
+
+const checkboxStyle = {
+  color: "#6366F1",
+  "&.Mui-checked": {
+    color: "#6366F1",
+  },
+};
 
 export default Filter

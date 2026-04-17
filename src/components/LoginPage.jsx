@@ -1,5 +1,4 @@
-import { FaUser, FaLock } from "react-icons/fa";
-import VIDEO from "../assets/Mars_Rotation_Web_HB_d96299f9de.mp4";
+import { Box, TextField, Typography, Button, Paper } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
@@ -38,194 +37,116 @@ const LoginPage = () => {
   }
   
   return (
-    <>
-      <style>
-        {`
-          .input {
-            width: 100%;
-            height: 45px;
-            border-radius: 40px;
-            border: 1px solid rgba(255,255,255,0.3);
-            background: transparent;
-            color: white;
-            padding: 0 45px 0 20px;
-            outline: none;
-            font-size: 14px;
-          }
+   <Box
+      sx={{
+        height: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
 
-          .input::placeholder {
-            color: white;
-            opacity: 1;
-          }
-        `}
-      </style>
+        background:
+          "radial-gradient(circle at top left, #6366F1, transparent 40%), radial-gradient(circle at bottom right, #06B6D4, transparent 40%), #0F172A",
+      }}
+    >
+      <Paper
+        sx={{
+          width: 380,
+          p: 4,
+          borderRadius: "20px",
 
-      <div style={styles.page}>
-      
-        <div style={styles.left}>
-          <div style={styles.card}>
-            <form style={styles.form} onSubmit={handleLogin}>
-              <h2 style={styles.title}>Login</h2>
+          background: "rgba(255,255,255,0.05)",
+          backdropFilter: "blur(20px)",
+          border: "1px solid rgba(255,255,255,0.1)",
 
-              <div style={styles.inputWrapper}>
-                <input type="text" placeholder="Username" name="username" className="input" value={user.username} onChange={handleChange} />
-                <FaUser style={styles.icon} />
-              </div>
+          boxShadow: "0 20px 60px rgba(0,0,0,0.5)",
+        }}
+      >
+        <Typography
+          variant="h5"
+          fontWeight={700}
+          sx={{ textAlign: "center", mb: 3, color: "#fff" }}
+        >
+          Welcome Back 👋
+        </Typography>
 
-              <div style={styles.inputWrapper}>
-                <input type="password" placeholder="Password" name="password" className="input" value={user.password} onChange={handleChange} />
-                <FaLock style={styles.icon} />
-              </div>
+        <form onSubmit={handleLogin}>
+          <TextField
+            fullWidth
+            label="Username"
+            name="username"
+            value={user.username}
+            onChange={handleChange}
+            variant="outlined"
+            sx={inputStyle}
+          />
 
-              <div style={styles.row}>
-                <label style={styles.checkboxLabel}>
-                  <input type="checkbox" />
-                  Remember me
-                </label>
+          <TextField
+            fullWidth
+            type="password"
+            label="Password"
+            name="password"
+            value={user.password}
+            onChange={handleChange}
+            variant="outlined"
+            sx={inputStyle}
+          />
 
-                <a href="#" style={styles.link}>
-                  Forgot Password
-                </a>
-              </div>
+          <Button
+            fullWidth
+            type="submit"
+            sx={{
+              mt: 2,
+              py: 1.5,
+              borderRadius: "30px",
+              fontWeight: 600,
+              background:
+                "linear-gradient(135deg,#6366F1,#06B6D4)",
+              color: "#fff",
+              fontSize: 16,
+              "&:hover": {
+                boxShadow: "0 8px 25px rgba(99,102,241,0.5)",
+              },
+            }}
+          >
+            Login
+          </Button>
 
-              <button type="submit" style={styles.button}>
-                Login
-              </button>
-
-              <p style={styles.registerText}>
-                Don&apos;t have an account?{" "}
-                <Link to="/register" style={styles.linkBold}>Register</Link>
-              </p>
-            </form>
-          </div>
-        </div>
-
-        <div style={styles.right}>
-          <video autoPlay muted loop playsInline style={styles.video}>
-            <source src={VIDEO} type="video/mp4" />
-          </video>
-
-          <div style={styles.overlay} />
-        </div>
-      </div>
-    </>
+          <Typography
+            sx={{
+              textAlign: "center",
+              mt: 2,
+              color: "#CBD5F5",
+              fontSize: 14,
+            }}
+          >
+            Don’t have an account?{" "}
+            <Link
+              to="/register"
+              style={{ color: "#fff", fontWeight: 600 }}
+            >
+              Register
+            </Link>
+          </Typography>
+        </form>
+      </Paper>
+    </Box>
   );
 };
 
-const styles = {
-  page: {
-    height: "100vh",
-    display: "flex",
-    fontFamily: "Poppins, sans-serif",
-    backgroundColor: "black",
+const inputStyle = {
+  mb: 2,
+  "& .MuiOutlinedInput-root": {
+    borderRadius: "12px",
+    color: "#fff",
+    "& fieldset": {
+      borderColor: "rgba(255,255,255,0.2)",
+    },
+    "&:hover fieldset": {
+      borderColor: "#6366F1",
+    },
   },
-
-  left: {
-    width: "50%",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-
-  card: {
-    width: 420,
-    height: 450,
-    padding: "0 40px",
-    color: "white",
-    borderRadius: 16,
-    background:
-      "linear-gradient(135deg, rgba(255,255,255,0.18), rgba(255,255,255,0.05))",
-    backdropFilter: "blur(12px)",
-    WebkitBackdropFilter: "blur(12px)",
-    border: "1px solid rgba(255,255,255,0.25)",
-    boxShadow: "0 20px 40px rgba(0,0,0,0.45)",
-  },
-
-  right: {
-    width: "50%",
-    minWidth: "50vw",
-    maxWidth: "50vw",
-    position: "relative",
-    overflow: "hidden",
-  },
-
-  video: {
-    width: "100%",
-    height: "100%",
-    objectFit: "cover",
-    objectPosition: "right center",
-    transform: "scale(1.05)",
-    filter: "brightness(1.15) contrast(1.1)",
-  },
-
-  overlay: {
-    position: "absolute",
-    inset: 0,
-    background:
-      "linear-gradient(to left, rgba(0,0,0,0.85), rgba(0,0,0,0) 60%), radial-gradient(circle at right center, rgba(255,120,60,0.25), transparent 55%)",
-    pointerEvents: "none",
-  },
-
-  form: { width: "100%" },
-
-  title: {
-    textAlign: "center",
-    marginBottom: 24,
-  },
-
-  inputWrapper: {
-    position: "relative",
-    marginBottom: 20,
-  },
-
-  icon: {
-    position: "absolute",
-    right: 18,
-    top: "50%",
-    transform: "translateY(-50%)",
-    color: "white",
-  },
-
-  row: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    fontSize: 14,
-    marginBottom: 20,
-  },
-
-  checkboxLabel: {
-    display: "flex",
-    alignItems: "center",
-    gap: 6,
-  },
-
-  link: {
-    color: "white",
-    textDecoration: "none",
-  },
-
-  button: {
-    width: "100%",
-    height: 45,
-    borderRadius: 40,
-    border: "none",
-    backgroundColor: "white",
-    color: "black",
-    fontWeight: 700,
-    cursor: "pointer",
-  },
-
-  registerText: {
-    textAlign: "center",
-    marginTop: 16,
-    fontSize: 15,
-  },
-
-  linkBold: {
-    color: "white",
-    fontWeight: 600,
-    textDecoration: "none",
+  "& .MuiInputLabel-root": {
+    color: "#aaa",
   },
 };
 

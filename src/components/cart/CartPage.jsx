@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
   Box,
-  Grid,
   Typography,
   IconButton,
   Button,
@@ -101,19 +100,25 @@ const CartPage = () => {
       <Box
         sx={{
           minHeight: "100vh",
-          bgcolor: "#f1f3f6",
+          bgcolor: "#F8FAFC",
           display: "flex",
           justifyContent: "center",
           alignItems: "center"
         }}
       >
-        <Paper sx={{ p: 5, textAlign: "center" }}>
+        <Paper sx={{ p: 5, textAlign: "center", borderRadius: 3 }}>
           <Typography variant="h6" fontWeight={600}>
-            Your cart is empty!
+            Your cart is empty 😔
           </Typography>
+
           <Button
             variant="contained"
-            sx={{ mt: 3, bgcolor: "#2874f0" }}
+            sx={{
+              mt: 3,
+              borderRadius: "25px",
+              background:
+                "linear-gradient(135deg, #6366F1, #06B6D4)"
+            }}
           >
             Shop Now
           </Button>
@@ -125,147 +130,146 @@ const CartPage = () => {
   return (
     <Box
       sx={{
-        height: "100vh",
-        bgcolor: "#f1f3f6",
+        minHeight: "100vh",
+        bgcolor: "#F1F5F9",
+        p: 3,
         display: "flex",
-        justifyContent: "center",
-        alignItems: "center"
+        justifyContent: "center"
       }}
     >
       <Box
         sx={{
           width: "100%",
           maxWidth: "1200px",
-          height: "90vh",
           display: "flex",
           gap: 3
         }}
       >
-        {/* LEFT SIDE - SCROLLABLE PRODUCTS */}
         <Paper
           sx={{
             flex: 2,
-            display: "flex",
-            flexDirection: "column",
+            borderRadius: 3,
             overflow: "hidden"
           }}
         >
           <Box
             sx={{
               p: 2,
-              borderBottom: "1px solid #eee",
-              fontWeight: 600
+              fontWeight: 600,
+              borderBottom: "1px solid #E5E7EB"
             }}
           >
             My Cart ({cart.length})
           </Box>
 
-          <Box
-            sx={{
-              flex: 1,
-              overflowY: "auto"
-            }}
-          >
-            {cart.map((item, index) => (
-              <Box key={item.id} sx={{ p: 3 }}>
-                <Box sx={{ display: "flex", gap: 3 }}>
-                  <Box sx={{ width: 120 }}>
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      style={{
-                        width: "100%",
-                        objectFit: "contain"
-                      }}
-                    />
-                  </Box>
+          {cart.map((item, index) => (
+            <Box key={item.id} sx={{ p: 3 }}>
+              <Box sx={{ display: "flex", gap: 3 }}>
+                <Box
+                  sx={{
+                    width: 120,
+                    height: 120,
+                    bgcolor: "#F8FAFC",
+                    borderRadius: 2,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center"
+                  }}
+                >
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    style={{ width: "90%" }}
+                  />
+                </Box>
 
-                  <Box sx={{ flex: 1 }}>
-                    <Typography fontWeight={500}>
-                      {item.name}
-                    </Typography>
+                <Box sx={{ flex: 1 }}>
+                  <Typography fontWeight={600}>
+                    {item.name}
+                  </Typography>
 
-                    <Typography
-                      sx={{ mt: 1, fontWeight: 600 }}
-                    >
-                      ₹{item.price}
-                    </Typography>
+                  <Typography
+                    sx={{
+                      mt: 1,
+                      fontWeight: 700,
+                      color: "#111827"
+                    }}
+                  >
+                    ₹{item.price}
+                  </Typography>
 
-                    {/* Quantity */}
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      mt: 2,
+                      gap: 2
+                    }}
+                  >
                     <Box
                       sx={{
                         display: "flex",
                         alignItems: "center",
-                        mt: 2,
-                        gap: 2
+                        border: "1px solid #E5E7EB",
+                        borderRadius: "25px",
+                        px: 1
                       }}
                     >
-                      <Box
-                        sx={{
-                          display: "flex",
-                          border: "1px solid #ddd",
-                          borderRadius: 1
-                        }}
-                      >
-                        <IconButton
-                          size="small"
-                          onClick={() =>
-                            handleQuantity(item.id, "dec")
-                          }
-                        >
-                          <RemoveIcon fontSize="small" />
-                        </IconButton>
-
-                        <Typography sx={{ px: 2 }}>
-                          {item.quantity}
-                        </Typography>
-
-                        <IconButton
-                          size="small"
-                          onClick={() =>
-                            handleQuantity(item.id, "inc")
-                          }
-                        >
-                          <AddIcon fontSize="small" />
-                        </IconButton>
-                      </Box>
-
                       <IconButton
-                        color="error"
+                        size="small"
                         onClick={() =>
-                          handleRemove(item.id)
+                          handleQuantity(item.id, "dec")
                         }
                       >
-                        <DeleteOutlineIcon />
+                        <RemoveIcon fontSize="small" />
+                      </IconButton>
+
+                      <Typography sx={{ px: 1 }}>
+                        {item.quantity}
+                      </Typography>
+
+                      <IconButton
+                        size="small"
+                        onClick={() =>
+                          handleQuantity(item.id, "inc")
+                        }
+                      >
+                        <AddIcon fontSize="small" />
                       </IconButton>
                     </Box>
+
+                    <IconButton
+                      onClick={() => handleRemove(item.id)}
+                      sx={{ color: "#EF4444" }}
+                    >
+                      <DeleteOutlineIcon />
+                    </IconButton>
                   </Box>
                 </Box>
-
-                {index !== cart.length - 1 && (
-                  <Divider sx={{ mt: 3 }} />
-                )}
               </Box>
-            ))}
-          </Box>
+
+              {index !== cart.length - 1 && (
+                <Divider sx={{ mt: 3 }} />
+              )}
+            </Box>
+          ))}
         </Paper>
 
-        {/* RIGHT SIDE - STICKY SUMMARY */}
         <Paper
           sx={{
             flex: 1,
             p: 3,
-            height: "fit-content",
-            alignSelf: "flex-start",
+            borderRadius: 3,
             position: "sticky",
-            top: 0
+            top: 20,
+            height: "fit-content"
           }}
         >
           <Typography
             sx={{
               fontSize: 14,
               fontWeight: 600,
-              color: "#878787"
+              color: "#6B7280"
             }}
           >
             PRICE DETAILS
@@ -294,26 +298,32 @@ const CartPage = () => {
           <Divider sx={{ my: 2 }} />
 
           <Box display="flex" justifyContent="space-between">
-            <Typography fontWeight={600}>
+            <Typography fontWeight={700}>
               Total
             </Typography>
-            <Typography fontWeight={600}>
+            <Typography fontWeight={700}>
               ₹{total}
             </Typography>
           </Box>
 
           <Button
             fullWidth
-            variant="contained"
             sx={{
               mt: 3,
-              bgcolor: "#fb641b",
               py: 1.5,
+              borderRadius: "25px",
               fontWeight: 600,
-              "&:hover": { bgcolor: "#e55b17" }
+              background:
+                "linear-gradient(135deg, #6366F1, #06B6D4)",
+              color: "#fff",
+
+              "&:hover": {
+                boxShadow:
+                  "0 5px 20px rgba(99,102,241,0.4)"
+              }
             }}
           >
-            PLACE ORDER
+            Place Order
           </Button>
         </Paper>
       </Box>

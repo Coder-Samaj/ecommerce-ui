@@ -3,6 +3,8 @@ import ProfileHeader from "./ProfileHeader";
 import ProfileInfo from "./ProfileInfo";
 import AddressCard from "./AddressCard";
 import OrderHistory from "./OrderHistory";
+import { Box, Paper } from "@mui/material";
+
 
 const Profile = () => {
     const user = {
@@ -33,22 +35,49 @@ const Profile = () => {
     ];
 
     return (
-        <div style={styles.container}>
-            <ProfileHeader user={user} />
-            <ProfileInfo user={user} />
-            <AddressCard address={address} />
-            <OrderHistory orders={orders} />
-        </div>
-    );
+       <Box
+      sx={{
+        minHeight: "100vh",
+        bgcolor: "#F8FAFC",
+        display: "flex",
+        justifyContent: "center",
+        py: 4,
+      }}
+    >
+      <Box
+        sx={{
+          width: "100%",
+          maxWidth: "1100px",
+          display: "flex",
+          flexDirection: "column",
+          gap: 3,
+        }}
+      >
+        <Paper sx={cardStyle}>
+          <ProfileHeader user={user} />
+        </Paper>
+
+        <Paper sx={cardStyle}>
+          <ProfileInfo user={user} />
+        </Paper>
+
+        <Paper sx={cardStyle}>
+          <AddressCard address={address} />
+        </Paper>
+
+        <Paper sx={cardStyle}>
+          <OrderHistory orders={orders} />
+        </Paper>
+      </Box>
+    </Box>
+  );
 };
 
-const styles = {
-    container: {
-        maxWidth: "1100px",
-        margin: "0 auto",
-        padding: "24px",
-        fontFamily: "Arial, sans-serif",
-    },
+const cardStyle = {
+  p: 3,
+  borderRadius: "16px",
+  boxShadow: "0 8px 25px rgba(0,0,0,0.06)",
+  backgroundColor: "#FFFFFF",
 };
 
 export default Profile;
