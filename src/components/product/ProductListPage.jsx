@@ -3,6 +3,7 @@ import ProductsList from "./ProductsList"
 import Navbar from "../Navbar/Navbar"
 import { useLocation } from "react-router-dom"
 import { Box } from "@mui/material";
+import { useState } from "react";
 
 const ProductListPage = () => {
 
@@ -15,6 +16,11 @@ const ProductListPage = () => {
   const searchQuery = queryParams.get("search") || "";
   // console.log(searchQuery);
 
+  const [filter,setFilter]=useState({
+    category:[],
+    brand:[],
+    price:[0,100000]
+  });
   return (
     <Box
       sx={{
@@ -51,7 +57,7 @@ const ProductListPage = () => {
             },
           }}
         >
-          <Filter />
+          <Filter setFilter={setFilter}/>
         </Box>
 
         <Box
@@ -70,7 +76,7 @@ const ProductListPage = () => {
             },
           }}
         >
-          <ProductsList searchQuery={searchQuery} />
+          <ProductsList searchQuery={searchQuery} filter={filter}/>
         </Box>
       </Box>
     </Box>

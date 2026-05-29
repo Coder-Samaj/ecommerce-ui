@@ -7,7 +7,9 @@ const productsData = [
     id: 1,
     name: "Apple iPhone 17 (Sage, 256 GB)",
     image: "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/n/v/e/-original-imahft5gfchxyewy.jpeg?q=70",
-    price: "₹82,900",
+    category: "Mobiles",
+    brand: "Apple",
+    price: 82900,
     exchangeOffer: "Upto ₹54,100 Off on Exchange",
     bankOffer: "Bank Offer Available",
     specs: [
@@ -22,7 +24,9 @@ const productsData = [
     id: 2,
     name: "Samsung Galaxy S24 (Black, 256 GB)",
     image: "https://www.designinfo.in/wp-content/uploads/2024/01/Samsung-Galaxy-S24-128GB-Onyx-Black-1-485x485.webp",
-    price: "₹74,999",
+    category: "Mobiles",
+    brand: "Samsung",
+    price: 74999,
     exchangeOffer: "Upto ₹40,000 Off on Exchange",
     bankOffer: "Bank Offer Available",
     specs: [
@@ -37,7 +41,9 @@ const productsData = [
     id: 3,
     name: "OnePlus 12 (Flowy Emerald, 256 GB)",
     image: "https://m.media-amazon.com/images/I/717Qo4MH97L._AC_UF1000,1000_QL80_.jpg",
-    price: "₹64,999",
+    category: "Mobiles",
+    brand: "OnePlus",
+    price: 64999,
     exchangeOffer: "Upto ₹35,000 Off on Exchange",
     bankOffer: "Bank Offer Available",
     specs: [
@@ -50,10 +56,20 @@ const productsData = [
   },
 ];
 
-const ProductsList = ({ searchQuery }) => {
+const ProductsList = ({ searchQuery, filter }) => {
 
   const filteredProducts = productsData.filter((product) => {
-    return product.name.toLowerCase().includes(searchQuery.toLowerCase());
+    // return product.name.toLowerCase().includes(searchQuery.toLowerCase());
+
+    const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase());
+
+    const matchesCategory = filter.category.length === 0 || filter.category.includes(product.category);
+
+    const matchesBrand = filter.brand.length === 0 || filter.brand.includes(product.brand);
+
+    const matchesPrice = product.price >= filter.price[0] && product.price <= filter.price[1];
+
+    return matchesSearch && matchesCategory && matchesBrand && matchesPrice
   })
 
   console.log(filteredProducts);

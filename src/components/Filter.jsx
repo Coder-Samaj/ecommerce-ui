@@ -10,7 +10,7 @@ import {
   Button,
 } from "@mui/material";
 
-const Filter = () => {
+const Filter = ({setFilter}) => {
   const [category, setCategory] = useState([]);
   const [brand, setBrand] = useState([]);
   const [price, setPrice] = useState([0, 100000])
@@ -44,10 +44,15 @@ const Filter = () => {
   }
 
   function handleApply() {
-    console.log("Applied Filters");
-    console.log("Selected Category:", category);
-    console.log("Selected Brand:", brand);
-    console.log("Selected Price:", price);
+    // console.log("Applied Filters");
+    // console.log("Selected Category:", category);
+    // console.log("Selected Brand:", brand);
+    // console.log("Selected Price:", price);
+    setFilter({
+      category:category,
+      brand:brand,
+      price:price
+    })
 
   }
 
@@ -55,7 +60,13 @@ const Filter = () => {
     setCategory([]);
     setBrand([]);
     setPrice([0, 100000]);
-    console.log("Filters Cleared")
+    // console.log("Filters Cleared")
+
+    setFilter({
+      category: [],
+      brand: [],
+      price: [0, 100000]
+    });
   }
 
   return (
